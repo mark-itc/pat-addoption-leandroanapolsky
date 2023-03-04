@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import PetsContextProvider from "./components/Context";
+import LogContextProvider from "./components/logContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <PetsContextProvider>
-    <App />
-  </PetsContextProvider>
+  <LogContextProvider>
+    <PetsContextProvider>
+      <App />
+    </PetsContextProvider>
+  </LogContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -3,8 +3,11 @@ import "./Button.css";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { petsContext } from "./Context";
+import { logContext } from "./logContext";
 
 function Modal(props) {
+  const { loggedIn, logUser } = useContext(logContext);
+
   const { modalShow, showLogin } = useContext(petsContext);
   const [signUpModal, setSignUpModal] = useState(false);
 

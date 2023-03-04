@@ -13,8 +13,8 @@ function Pet() {
         <div>Height: altura de bicho</div>
         <div>Weight: peso de bicho</div>
         <div>Status: status de bicho</div>
-        <Button content='Adopt' buttonStyle='main'/>
-        <Button content='Foster' buttonStyle='main second'/>
+        <button className="main">Adopt</button>
+        <button className="main second">Foster</button>
       </div>
     </div>
   );

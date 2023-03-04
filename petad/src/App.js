@@ -11,15 +11,13 @@ import User from "./views/User";
 function App() {
   return (
     <div className="App">
-      
       <BrowserRouter>
-      
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Search" element={<Search />} />
-          <Route path="/Pet" element={<Pet />} />
-          <Route path="/User" element={<User />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/pet" element={<Pet />} />
+          <Route path="/user" element={<User />} />
         </Routes>
       </BrowserRouter>
     </div>

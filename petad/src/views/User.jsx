@@ -1,28 +1,34 @@
 import "./User.css";
-import Button from "../components/Button";
+import Modal from "../components/Modal";
+import { useContext } from "react";
+import { logContext } from "../components/logContext";
 
 function User() {
+  const { loggedIn, logUserOut } = useContext(logContext);
   return (
     <div>
-      <div className="pet-card">
+      <Modal />
+      <div className="user-card">
         <div>aca tiene que ir la foto</div>
         <h3>Nombre del User</h3>
-        <div>
-          <label className="label">Password</label>
-          <input type="text" className="modal-input"></input>
-          <label className="label">email</label>
-          <input type="text" className="modal-input"></input>
-          <label className="label">First Name</label>
-          <input type="text" className="modal-input"></input>
-          <label className="label">Last Name</label>
-          <input type="text" className="modal-input"></input>
-          <label className="label">Phone Number</label>
-          <input type="text" className="modal-input"></input>
-          <label className="label">Bio</label>
-          <input type="text" className="modal-input"></input>
-        </div>
-        <Button content="Save Changes" buttonStyle="main" />
-        <Button content="Log Out" buttonStyle="main second" />
+
+        <label className="user-label">Password</label>
+        <input type="text" className="user-input"></input>
+        <label className="user-label">email</label>
+        <input type="text" className="user-input"></input>
+        <label className="user-label">First Name</label>
+        <input type="text" className="user-input"></input>
+        <label className="user-label">Last Name</label>
+        <input type="text" className="user-input"></input>
+        <label className="user-label">Phone Number</label>
+        <input type="text" className="user-input"></input>
+        <label className="user-label">Bio</label>
+        <input type="text" className="user-input"></input>
+
+        <button className="main">Save Changes</button>
+        <button className="main second" onClick={(e) => logUserOut()}>
+          Log Out
+        </button>
       </div>
       <div>
         <h3>My pets</h3>
