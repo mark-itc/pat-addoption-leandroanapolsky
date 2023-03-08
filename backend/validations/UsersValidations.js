@@ -8,18 +8,11 @@ module.exports.RegisterValidation = ajv.compile({
     username: { type: "string" },
     password: { type: "string" },
     password2: { type: "string" },
-    firstname: { type: "string" },
-    lastname: { type: "string" },
-    phonenumber: { type: "integer" },
+
+    phone: { type: "string" },
+    email: { type: "string" },
   },
-  required: [
-    "username",
-    "password",
-    "password2",
-    "firstname",
-    "lastname",
-    "phonenumber",
-  ],
+  required: ["email", "password", "password2", "username", "phone"],
   additionalProperties: false,
 });
 

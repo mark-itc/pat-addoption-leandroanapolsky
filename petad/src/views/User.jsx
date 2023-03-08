@@ -5,7 +5,9 @@ import { useContext } from "react";
 import { logContext } from "../components/logContext";
 
 function User() {
-  const { loggedIn, logUserOut } = useContext(logContext);
+  const { loggedIn, logUser } = useContext(logContext);
+
+  
   return (
     <div>
       <Modal />
@@ -27,7 +29,7 @@ function User() {
         <input type="text" className="user-input"></input>
 
         <button className="main">Save Changes</button>
-        <button className="main second" onClick={(e) => logUserOut()}>
+        <button className="main second" onClick={(e) => logUser()}>
           Log Out
         </button>
       </div>

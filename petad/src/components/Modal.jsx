@@ -16,12 +16,34 @@ function Modal(props) {
   };
 
   const [signInObj, setSignInObj] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
+  
+
+
   const checkSignIn = () => {
-    console.log(signInObj);
+    
+
+    fetch("http://localhost:3001/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signInObj),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos enviados:", data);
+      })
+      .catch((error) => {
+        console.error("Error al enviar datos:", error);
+      });
+
+      showLogin()
+      logUser()
+
   };
 
   const [signUpObj, setSignUpObj] = useState({
@@ -29,10 +51,31 @@ function Modal(props) {
     password: "",
     password2: "",
     phone: "",
+    username: "",
   });
 
+  
+
   const checkSignUp = () => {
-    console.log(signUpObj);
+    // console.log(signUpObj);
+    fetch("http://localhost:3001/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signUpObj),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos enviados:", data);
+      })
+      .catch((error) => {
+        console.error("Error al enviar datos:", error);
+      });
+
+      showLogin()
+      logUser()
+    
   };
 
   return (
@@ -54,6 +97,14 @@ function Modal(props) {
                 className="modal-input"
                 onChange={(e) =>
                   setSignUpObj({ ...signUpObj, email: e.target.value })
+                }
+              ></input>
+              <label className="label">Username</label>
+              <input
+                type="text"
+                className="modal-input"
+                onChange={(e) =>
+                  setSignUpObj({ ...signUpObj, username: e.target.value })
                 }
               ></input>
               <label className="label">Password</label>
@@ -95,12 +146,12 @@ function Modal(props) {
                   X
                 </button>
               </div>
-              <label className="label">Email</label>
+              <label className="label">Username</label>
               <input
                 type="text"
                 className="modal-input"
                 onChange={(e) =>
-                  setSignInObj({ ...signInObj, email: e.target.value })
+                  setSignInObj({ ...signInObj, username: e.target.value })
                 }
               ></input>
               <label className="label">Password</label>

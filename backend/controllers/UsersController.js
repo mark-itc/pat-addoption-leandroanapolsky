@@ -33,6 +33,7 @@ module.exports = class UsersController {
       }
 
       userObject.password = sha256.sha256(userObject.password);
+      userObject.password2 = sha256.sha256(userObject.password2);
 
       await UsersDAO.createUser(req.body);
       return res.json(req.body);
@@ -64,7 +65,7 @@ module.exports = class UsersController {
         });
       }
 
-    //   await UsersDAO.getUserById("640668a9ea3a49d5538a56a9");
+      //   await UsersDAO.getUserById("640668a9ea3a49d5538a56a9");
 
       const token = jwt.sign(
         {
