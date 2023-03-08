@@ -7,6 +7,7 @@ import Pet from "./views/Pet";
 import Home from "./views/Home";
 import Search from "./views/Search";
 import User from "./views/User";
+import AddPet from "./views/AddPet";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/pet" element={<Pet />} />
           <Route path="/user" element={<User />} />
+          <Route path="/admin/addpet" element={<AddPet />} />
         </Routes>
       </BrowserRouter>
     </div>

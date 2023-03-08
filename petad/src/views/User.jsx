@@ -1,5 +1,6 @@
 import "./User.css";
 import Modal from "../components/Modal";
+import PetCard from "../components/PetCard";
 import { useContext } from "react";
 import { logContext } from "../components/logContext";
 
@@ -32,10 +33,9 @@ function User() {
       </div>
       <div>
         <h3>My pets</h3>
-        <div>Aca viene su perrito</div>
-        <div>Aca viene su perrito</div>
-        <div>Aca viene su perrito</div>
-        <div>Aca viene su perrito</div>
+        <PetCard/>
+        <PetCard/>
+        <PetCard/>
       </div>
     </div>
   );

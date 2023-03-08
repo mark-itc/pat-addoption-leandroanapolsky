@@ -10,3 +10,6 @@
     align-items: center;
     padding: 20px;
 }
+.results-card-cont {
+    display: flex;
+}
