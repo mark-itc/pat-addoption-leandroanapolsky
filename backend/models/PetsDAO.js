@@ -1,3 +1,5 @@
+const {ObjectId} = require('mongodb')
+
 let collection;
 
 module.exports = class PetsDAO {
@@ -20,6 +22,14 @@ module.exports = class PetsDAO {
         type: { $eq: type },
       })
       .toArray();
+  }
+
+  //SEARCH BY ID
+  static async getPetByID(id) {
+    console.log("sucede la busqueda", id);
+
+    return await collection.findOne({ _id: new ObjectId(id) })
+      
   }
 
   //ADD PET

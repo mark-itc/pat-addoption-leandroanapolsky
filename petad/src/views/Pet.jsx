@@ -1,19 +1,40 @@
+import { useParams } from "react-router-dom";
 import "./Pet.css";
-import Button from "../components/Button";
 import Modal from "../components/Modal";
+import { useState } from "react";
 
 function Pet() {
+  const { id } = useParams();
+
+  const [mascota, setMascota] = useState([]);
+
+  const getPetData = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/search/:${id}`);
+      const data = await response.json();
+      setMascota([...data]);
+      console.log(mascota);
+
+      // return data;
+    } catch (e) {
+      console.log("error en el fetch del search por id", e);
+    }
+  };
+
   return (
     <div>
       <Modal />
       <div className="pet-card">
-        <div>aca tiene que ir la foto</div>
-        <h3>Nombre del rope</h3>
-        <div>Type: Tipo de bicho</div>
-        <div>Height: altura de bicho</div>
-        <div>Weight: peso de bicho</div>
-        <div>Status: status de bicho</div>
-        <button className="main">Adopt</button>
+        <div>PHOTO</div>
+        <h3>NAME</h3>
+        <div>Type: </div>
+
+        <div>Height: </div>
+        <div>Weight: </div>
+        <div>Status: </div>
+        <button className="main" onClick={getPetData}>
+          Adopt
+        </button>
         <button className="main second">Foster</button>
       </div>
     </div>

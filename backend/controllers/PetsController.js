@@ -3,12 +3,22 @@ const PetsDAO = require("../models/PetsDAO");
 module.exports = class PetsController {
   static async Search(req, res) {
     try {
-      
       const petsArray = await PetsDAO.getPetBySearch(req.query.type);
       console.log("resultados del controller", petsArray);
       return res.send(petsArray);
     } catch (e) {
       console.log("the search failed in pets controller");
+    }
+  }
+
+  static async SearchOne(req, res) {
+    try {
+      const petFound = await PetsDAO.getPetByID(req.params
+        );
+      console.log("pet found", petFound);
+      return res.send(petFound);
+    } catch (e) {
+      console.log("the search failed in pets controller search one");
     }
   }
 

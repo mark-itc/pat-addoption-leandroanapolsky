@@ -22,17 +22,8 @@ app.use(cors(corsOptions));
 app.post("/register", UsersController.Register);
 app.post("/login", UsersController.Login);
 app.get("/search", PetsController.Search);
-app.post("/newPet", PetsController.PostNewPet);
-// app.get("/search", (req, res) => {
-
-//   console.log(req.query);
-//   res.send(req.query.type);
-// });
-
-// app.post("/task/new", AuthMiddleware, (req, res) => {
-//   console.log(req.currentUser);
-//   res.send();
-// });
+app.get("/search/:id", PetsController.SearchOne);
+app.post("/admin/newPet", PetsController.PostNewPet);
 
 app.listen(3001, () => {
   console.log("connection running on port 3001");

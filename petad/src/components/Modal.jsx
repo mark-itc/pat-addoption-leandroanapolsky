@@ -6,7 +6,7 @@ import { petsContext } from "./Context";
 import { logContext } from "./logContext";
 
 function Modal(props) {
-  const { loggedIn, logUser } = useContext(logContext);
+  const { loggedIn, logUser, sendUserToContext } = useContext(logContext);
 
   const { modalShow, showLogin } = useContext(petsContext);
   const [signUpModal, setSignUpModal] = useState(false);
@@ -20,12 +20,7 @@ function Modal(props) {
     password: "",
   });
 
-  
-
-
   const checkSignIn = () => {
-    
-
     fetch("http://localhost:3001/login", {
       method: "POST",
       headers: {
@@ -41,9 +36,8 @@ function Modal(props) {
         console.error("Error al enviar datos:", error);
       });
 
-      showLogin()
-      logUser()
-
+    showLogin();
+    logUser();
   };
 
   const [signUpObj, setSignUpObj] = useState({
@@ -53,8 +47,6 @@ function Modal(props) {
     phone: "",
     username: "",
   });
-
-  
 
   const checkSignUp = () => {
     // console.log(signUpObj);
@@ -73,9 +65,8 @@ function Modal(props) {
         console.error("Error al enviar datos:", error);
       });
 
-      showLogin()
-      logUser()
-    
+    showLogin();
+    logUser();
   };
 
   return (

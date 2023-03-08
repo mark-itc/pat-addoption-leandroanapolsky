@@ -5,6 +5,7 @@ export const logContext = createContext();
 export default function LogContextProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
+
   const logUser = () => {
     setLoggedIn(!loggedIn);
   };
@@ -14,8 +15,10 @@ export default function LogContextProvider({ children }) {
     setLoggedIn(false);
   };
 
+  
+
   return (
-    <logContext.Provider value={{ loggedIn, logUser, logUserOut }}>
+    <logContext.Provider value={{ loggedIn, logUser, logUserOut}}>
       {children}
     </logContext.Provider>
   );

@@ -19,6 +19,8 @@ function Search() {
 
   const advSearch = async () => {
     try {
+      
+      
       const response = await fetch(
         `http://localhost:3001/search?type=${searchObj.type}&status=${searchObj.status}&height=${searchObj.height}&weight=${searchObj.weight}&name=${searchObj.name}`
       );
@@ -34,14 +36,17 @@ function Search() {
 
   const search = async () => {
     try {
+
+      
       const response = await fetch(
         `http://localhost:3001/search?type=${searchObj.type}`
+        
       );
       const data = await response.json();
       // console.log(data);
       setSearchResults([...data]);
       console.log("search results", searchResults);
-      // return data;
+      return data;
     } catch (e) {
       console.log("error en el fetch del search", e);
     }
@@ -142,7 +147,7 @@ function Search() {
 
       <div className="results-card-cont">
         {searchResults.map((item) => (
-          <PetCard name={item.name} status={item.status} />
+          <PetCard name={item.name} status={item.status} id={item._id}/>
         ))}
       </div>
     </>

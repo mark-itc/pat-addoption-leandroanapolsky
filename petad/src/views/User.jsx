@@ -7,6 +7,7 @@ import { logContext } from "../components/logContext";
 function User() {
   const { loggedIn, logUser } = useContext(logContext);
 
+
   
   return (
     <div>
