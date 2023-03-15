@@ -25,15 +25,24 @@ module.exports = class UsersDAO {
   }
 
   static async getUserById(userId) {
-    // console.log(await collection.findOne({ _id: new ObjectId(userId) }));
-    // return await collection.findOne({ _id: userId });
-    return await collection.findOne({ _id: new ObjectId(userId) })
+    return await collection.findOne({ _id: new ObjectId(userId) });
   }
 
   static async updateUser(userData) {
-    await collection.updateOne(
+    return await collection.updateOne(
       { username: userData.username },
       { $set: { userData } }
+    );
+  }
+
+  static async showAllUsers(req) {
+    return await collection.find().toArray();
+  }
+
+  static async editUser(req) {
+    return await collection.updateOne(
+      { _id: new ObjectId(req.params) },
+      { $set: req.body }
     );
   }
 };

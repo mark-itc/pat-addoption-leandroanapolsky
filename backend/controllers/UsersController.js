@@ -65,8 +65,6 @@ module.exports = class UsersController {
         });
       }
 
-      //   await UsersDAO.getUserById("640668a9ea3a49d5538a56a9");
-
       const token = jwt.sign(
         {
           user_id: user._id,
@@ -74,6 +72,13 @@ module.exports = class UsersController {
         },
         tokenPass
       );
+
+      if (!req.cookies.token) {
+        res.cookie("token", token, { maxAge: 1000000 });
+        console.log("cookie created");
+      }
+
+      // console.log(token)
 
       return res.json({
         token: token,
@@ -84,6 +89,34 @@ module.exports = class UsersController {
         success: false,
         message: "Unknown error",
       });
+    }
+  }
+
+  static async UserById(req, res) {
+    try {
+      const foundUser = await UsersDAO.getUserById(req.params);
+      console.log(foundUser);
+      return res.send(foundUser);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async GetAllUsers(req, res) {
+    try {
+      const allUsers = await UsersDAO.showAllUsers(req);
+      return res.send(allUsers);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async EditUser(req, res) {
+    try {
+      const editUser = await UsersDAO.editUser(req);
+      return res.send(editUser);
+    } catch (error) {
+      console.log(error);
     }
   }
 };

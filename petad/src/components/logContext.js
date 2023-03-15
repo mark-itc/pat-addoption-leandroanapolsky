@@ -3,7 +3,8 @@ import { createContext, useState } from "react";
 export const logContext = createContext();
 
 export default function LogContextProvider({ children }) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState();
+
 
 
   const logUser = () => {
@@ -15,6 +16,7 @@ export default function LogContextProvider({ children }) {
     setLoggedIn(false);
   };
 
+  
   
 
   return (

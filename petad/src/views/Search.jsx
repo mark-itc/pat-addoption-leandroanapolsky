@@ -147,7 +147,7 @@ function Search() {
 
       <div className="results-card-cont">
         {searchResults.map((item) => (
-          <PetCard name={item.name} status={item.status} id={item._id}/>
+          <PetCard name={item.name} status={item.status} id={item._id} photo={item.image}/>
         ))}
       </div>
     </>

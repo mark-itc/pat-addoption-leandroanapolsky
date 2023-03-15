@@ -1,9 +1,12 @@
 import "./Modal.css";
 import "./Button.css";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { petsContext } from "./Context";
 import { logContext } from "./logContext";
+const cookie = Cookies.get("token");
+  console.log(cookie);
 
 function Modal(props) {
   const { loggedIn, logUser, sendUserToContext } = useContext(logContext);
@@ -26,6 +29,7 @@ function Modal(props) {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: 'include',
       body: JSON.stringify(signInObj),
     })
       .then((response) => response.json())
@@ -34,10 +38,12 @@ function Modal(props) {
       })
       .catch((error) => {
         console.error("Error al enviar datos:", error);
+        
       });
 
     showLogin();
     logUser();
+    
   };
 
   const [signUpObj, setSignUpObj] = useState({
@@ -49,8 +55,7 @@ function Modal(props) {
   });
 
   const checkSignUp = () => {
-    // console.log(signUpObj);
-    fetch("http://localhost:3001/register", {
+    fetch("http://localhost:3001/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,6 +73,14 @@ function Modal(props) {
     showLogin();
     logUser();
   };
+
+  useEffect(()=> {
+    if(cookie){
+      fetch(`http://localhost:3001/user/auth`, { withCredentials: true }).then(res=>{console.log(res)});
+          
+          
+    }
+      },[])
 
   return (
     <>

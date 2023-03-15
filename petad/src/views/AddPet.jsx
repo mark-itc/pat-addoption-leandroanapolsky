@@ -1,11 +1,10 @@
 import "./AddPet.css";
 import Modal from "../components/Modal";
-import PetCard from "../components/PetCard";
-import { useContext, useState } from "react";
-import { logContext } from "../components/logContext";
+
+import { useState, useEffect } from "react";
 
 function AddPet() {
-  const { loggedIn, logUserOut } = useContext(logContext);
+  const [photo, setPhoto] = useState("");
   const [newPet, setNewPet] = useState({
     type: "",
     name: "",
@@ -17,26 +16,54 @@ function AddPet() {
     hypoallergenic: "",
     dietaryRestrictions: "",
     breed: "",
+    image: "",
   });
 
-  const addNewPet = () => {
-    console.log(newPet);
-
-    fetch('http://localhost:3001/newPet', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newPet)
+  const addNewPet = async () => {
+    fetch("http://localhost:3001/pet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPet),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Datos enviados:", data);
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Datos enviados:', data);
-      })
-      .catch(error => {
-        console.error('Error al enviar datos:', error);
+      .catch((error) => {
+        console.error("Error al enviar datos:", error);
       });
+    console.log(photo);
   };
+
+  const handleUploadPhoto = async (e) => {
+    setPhoto(e.target.files[0]);
+  };
+
+  const sumarUrl = async () => {
+    console.log("foto antes", photo);
+
+    const formData = new FormData();
+    formData.append("image", photo);
+
+    const response = await fetch("http://localhost:3001/pet/foto", {
+      method: "POST",
+      body: formData,
+    });
+    console.log(response);
+    const data = await response.json();
+    console.log("data", data.url.toString());
+    setNewPet((prevState) => ({
+      ...prevState,
+      image: data.url,
+    }));
+    console.log("el nuevo pet", newPet);
+  };
+
+  useEffect(() => {
+    sumarUrl();
+  }, [photo]);
 
   return (
     <div>
@@ -119,6 +146,13 @@ function AddPet() {
           type="text"
           className="user-input"
           onChange={(e) => setNewPet({ ...newPet, bio: e.target.value })}
+        ></input>
+        <label className="user-label">Photo</label>
+        <input
+          type="file"
+          name="image"
+          className="user-input"
+          onChange={handleUploadPhoto}
         ></input>
 
         <button className="main" onClick={addNewPet}>

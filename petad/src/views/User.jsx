@@ -1,12 +1,15 @@
 import "./User.css";
 import Modal from "../components/Modal";
 import PetCard from "../components/PetCard";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { logContext } from "../components/logContext";
 
 function User() {
   const { loggedIn, logUser } = useContext(logContext);
 
+  const [user, setUser]=useState({})
+
+  
 
   
   return (
@@ -34,12 +37,12 @@ function User() {
           Log Out
         </button>
       </div>
-      <div>
+      {/* <div>
         <h3>My pets</h3>
         <PetCard/>
         <PetCard/>
         <PetCard/>
-      </div>
+      </div> */}
     </div>
   );
 }

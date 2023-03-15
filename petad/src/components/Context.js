@@ -8,6 +8,8 @@ export default function PetsContextProvider({ children }) {
   const showLogin = () => {
     setModalShow(!modalShow);
   };
+
+  
   
   return (
     <petsContext.Provider value={{ modalShow, showLogin }}>

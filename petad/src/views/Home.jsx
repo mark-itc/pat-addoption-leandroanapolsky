@@ -1,8 +1,9 @@
 import "./Home.css";
+import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { logContext } from "../components/logContext";
 
 import { petsContext } from "../components/Context";
@@ -10,12 +11,21 @@ import { petsContext } from "../components/Context";
 function Home() {
   const { loggedIn, logUser } = useContext(logContext);
   const { modalShow, showLogin } = useContext(petsContext);
+  const cookie = Cookies.get("token");
+  // console.log(cookie);
   // const [modalShow, setModalShow] = useState(false);
 
   // const showLogin = () => {
   //   setModalShow(!modalShow);
   //   console.log('login')
   // };
+
+  useEffect(() => {
+    if (cookie) {
+      console.log("buscando cookies");
+      fetch(`http://localhost:3001/user/auth`, { credentials: true });
+    }
+  }, []);
 
   return (
     <>
