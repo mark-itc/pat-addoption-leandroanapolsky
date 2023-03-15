@@ -5,14 +5,16 @@ import React, { useState } from "react";
 import { useContext, useEffect } from "react";
 import { petsContext } from "./Context";
 import { logContext } from "./logContext";
-const cookie = Cookies.get("token");
-  console.log(cookie);
+// const cookie = Cookies.get("token");
+//   console.log(cookie);
 
 function Modal(props) {
-  const { loggedIn, logUser, sendUserToContext } = useContext(logContext);
+  const { loggedIn, logUser, sendUserToContext, checkSignIn } = useContext(logContext);
 
   const { modalShow, showLogin } = useContext(petsContext);
   const [signUpModal, setSignUpModal] = useState(false);
+  // const [signedUserToken, setSignedUserToken] = useState({ userToken: "" });
+
 
   const handleSignMode = () => {
     setSignUpModal(!signUpModal);
@@ -23,28 +25,26 @@ function Modal(props) {
     password: "",
   });
 
-  const checkSignIn = () => {
-    fetch("http://localhost:3001/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: 'include',
-      body: JSON.stringify(signInObj),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Datos enviados:", data);
-      })
-      .catch((error) => {
-        console.error("Error al enviar datos:", error);
-        
-      });
+  // const checkSignIn = () => {
+  //   fetch("http://localhost:3001/login", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(signInObj),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("Datos enviados:", data);
+  //       setSignedUserToken((prevState)=>({...prevState, userToken: data.token}))
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error al enviar datos:", error);
+  //     });
 
-    showLogin();
-    logUser();
-    
-  };
+  //   showLogin();
+  //   logUser();
+  // };
 
   const [signUpObj, setSignUpObj] = useState({
     email: "",
@@ -74,13 +74,13 @@ function Modal(props) {
     logUser();
   };
 
-  useEffect(()=> {
-    if(cookie){
-      fetch(`http://localhost:3001/user/auth`, { withCredentials: true }).then(res=>{console.log(res)});
+  // useEffect(()=> {
+  //   if(cookie){
+  //     fetch(`http://localhost:3001/user/auth`, { withCredentials: true }).then(res=>{console.log(res)});
           
           
-    }
-      },[])
+  //   }
+  //     },[])
 
   return (
     <>
@@ -170,7 +170,7 @@ function Modal(props) {
               <button className="main second" onClick={handleSignMode}>
                 Sign Up
               </button>
-              <button className="main" onClick={checkSignIn}>
+              <button className="main" onClick={(e)=> checkSignIn(signInObj)}>
                 Submit
               </button>
             </div>

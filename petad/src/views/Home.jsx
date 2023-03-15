@@ -20,19 +20,32 @@ function Home() {
   //   console.log('login')
   // };
 
-  useEffect(() => {
-    if (cookie) {
-      console.log("buscando cookies");
-      fetch(`http://localhost:3001/user/auth`, { credentials: true });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (cookie) {
+  //     console.log("buscando cookies");
+  //     fetch(`http://localhost:3001/user/auth`, { credentials: true });
+  //   }
+  // }, []);
+
+  const[token, setToken] = useState({})
+
+  const getUserToken = () => {
+    const objToken = localStorage.getItem("signedUserToken");
+    const theToken = JSON.parse(objToken);
+    setToken(theToken)
+  };
+
+  useEffect(()=>{
+getUserToken()
+console.log('soy un token', token.userToken)
+  },[])
 
   return (
     <>
       <div className="home-container">
         <Modal />
         <div className="cont-left">
-          <h1>Ready? Pet, Go!</h1>
+          <h1>Ready? Pet, Go! {token.userToken} </h1>
           <p>
             Don't you wonder what does addopting a pet feels like? Join our
             community and find out. Hundreds of pets are waiting for you to meet

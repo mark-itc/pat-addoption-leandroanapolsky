@@ -73,10 +73,10 @@ module.exports = class UsersController {
         tokenPass
       );
 
-      if (!req.cookies.token) {
-        res.cookie("token", token, { maxAge: 1000000 });
-        console.log("cookie created");
-      }
+      // if (!req.cookies.token) {
+      //   res.cookie("token", token, { maxAge: 1000000 });
+      //   console.log("cookie created");
+      // }
 
       // console.log(token)
 

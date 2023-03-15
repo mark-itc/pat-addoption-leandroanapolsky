@@ -1,23 +1,29 @@
 import "./User.css";
 import Modal from "../components/Modal";
 import PetCard from "../components/PetCard";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { logContext } from "../components/logContext";
 
 function User() {
   const { loggedIn, logUser } = useContext(logContext);
+// const[token, setToken] = useState({})
 
-  const [user, setUser]=useState({})
+//   const getUserToken = () => {
+//     const objToken = localStorage.getItem("signedUserToken");
+//     const theToken = JSON.parse(objToken);
+//     setToken(theToken)
+//   };
 
-  
+//   useEffect(()=>{
+// getUserToken()
+//   },[])
 
-  
   return (
     <div>
       <Modal />
       <div className="user-card">
         <div>aca tiene que ir la foto</div>
-        <h3>Nombre del User</h3>
+        <h3>Nombre del User </h3>
 
         <label className="user-label">Password</label>
         <input type="text" className="user-input"></input>
