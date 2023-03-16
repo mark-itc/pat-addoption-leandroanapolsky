@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
 import "./Pet.css";
 import Modal from "../components/Modal";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
+import { logContext } from "../components/logContext";
 function Pet() {
   const { id } = useParams();
+  const { loggedUser } = useContext(logContext);
 
   const [mascota, setMascota] = useState([]);
 

@@ -39,10 +39,10 @@ module.exports = class UsersDAO {
     return await collection.find().toArray();
   }
 
-  static async editUser(req) {
+  static async editUser(newData) {
     return await collection.updateOne(
-      { _id: new ObjectId(req.params) },
-      { $set: req.body }
+      { username: newData.username },
+      { $set: newData }
     );
   }
 };

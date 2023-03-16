@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./Search.css";
 import "../components/Button.css";
 import Modal from "../components/Modal";
 import PetCard from "../components/PetCard";
-
+import { logContext } from "../components/logContext";
 function Search() {
+  const { loggedUser } =
+    useContext(logContext);
   const [advance, setAdvance] = useState(false);
 
   const [searchResults, setSearchResults] = useState([]);
@@ -19,8 +21,6 @@ function Search() {
 
   const advSearch = async () => {
     try {
-      
-      
       const response = await fetch(
         `http://localhost:3001/search?type=${searchObj.type}&status=${searchObj.status}&height=${searchObj.height}&weight=${searchObj.weight}&name=${searchObj.name}`
       );
@@ -35,12 +35,18 @@ function Search() {
   };
 
   const search = async () => {
-    try {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("authorization", "Bearer " + loggedUser.token);
 
-      
+    const options = {
+      method: "GET",
+      headers: headers,
+    };
+
+    try {
       const response = await fetch(
-        `http://localhost:3001/search?type=${searchObj.type}`
-        
+        `http://localhost:3001/search?type=${searchObj.type}`, options
       );
       const data = await response.json();
       // console.log(data);
@@ -147,7 +153,12 @@ function Search() {
 
       <div className="results-card-cont">
         {searchResults.map((item) => (
-          <PetCard name={item.name} status={item.status} id={item._id} photo={item.image}/>
+          <PetCard
+            name={item.name}
+            status={item.status}
+            id={item._id}
+            photo={item.image}
+          />
         ))}
       </div>
     </>

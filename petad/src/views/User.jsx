@@ -5,40 +5,80 @@ import { useContext, useState, useEffect } from "react";
 import { logContext } from "../components/logContext";
 
 function User() {
-  const { loggedIn, logUser } = useContext(logContext);
-// const[token, setToken] = useState({})
+  const { loggedIn, logUser, loggedUser } = useContext(logContext);
 
-//   const getUserToken = () => {
-//     const objToken = localStorage.getItem("signedUserToken");
-//     const theToken = JSON.parse(objToken);
-//     setToken(theToken)
-//   };
+  const [updatingObject, setUpdatingObject] = useState({username: loggedUser.username});
 
-//   useEffect(()=>{
-// getUserToken()
-//   },[])
+  const updatingUser = async () => {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    headers.append("authorization", "Bearer " + loggedUser.token);
+
+    const options = {
+      method: "PUT",
+      headers: headers,
+      body: JSON.stringify(updatingObject),
+    };
+
+    const response = await fetch(
+      `http://localhost:3001/user/${loggedUser.UserId}`,
+      options
+    );
+    const data = await response.json();
+    return data;
+  };
 
   return (
     <div>
       <Modal />
       <div className="user-card">
-        <div>aca tiene que ir la foto</div>
-        <h3>Nombre del User </h3>
+        <h3>{loggedUser.username}</h3>
 
-        <label className="user-label">Password</label>
-        <input type="text" className="user-input"></input>
+       
         <label className="user-label">email</label>
-        <input type="text" className="user-input"></input>
+        <input
+          type="text"
+          className="user-input"
+          onChange={(e) =>
+            setUpdatingObject({ ...updatingObject, email: e.target.value })
+          }
+        ></input>
         <label className="user-label">First Name</label>
-        <input type="text" className="user-input"></input>
+        <input
+          type="text"
+          className="user-input"
+          onChange={(e) =>
+            setUpdatingObject({ ...updatingObject, firstname: e.target.value })
+          }
+        ></input>
         <label className="user-label">Last Name</label>
-        <input type="text" className="user-input"></input>
+        <input
+          type="text"
+          className="user-input"
+          onChange={(e) =>
+            setUpdatingObject({ ...updatingObject, lastname: e.target.value })
+          }
+        ></input>
         <label className="user-label">Phone Number</label>
-        <input type="text" className="user-input"></input>
-        <label className="user-label">Bio</label>
-        <input type="text" className="user-input"></input>
+        <input
+          type="text"
+          className="user-input"
+          onChange={(e) =>
+            setUpdatingObject({
+              ...updatingObject,
+              phonenumber: e.target.value,
+            })
+          }
+        ></input>
 
-        <button className="main">Save Changes</button>
+        <button
+          className="main"
+          onClick={() => {
+            updatingUser();
+          }}
+        >
+          Save Changes
+        </button>
         <button className="main second" onClick={(e) => logUser()}>
           Log Out
         </button>

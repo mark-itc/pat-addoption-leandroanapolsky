@@ -9,9 +9,9 @@ import { logContext } from "../components/logContext";
 import { petsContext } from "../components/Context";
 
 function Home() {
-  const { loggedIn, logUser } = useContext(logContext);
-  const { modalShow, showLogin } = useContext(petsContext);
-  const cookie = Cookies.get("token");
+  const { loggedIn, logUser, modalShow, showLogin } = useContext(logContext);
+  // const { modalShow, showLogin } = useContext(petsContext);
+  // const cookie = Cookies.get("token");
   // console.log(cookie);
   // const [modalShow, setModalShow] = useState(false);
 
@@ -35,17 +35,17 @@ function Home() {
     setToken(theToken)
   };
 
-  useEffect(()=>{
-getUserToken()
-console.log('soy un token', token.userToken)
-  },[])
+//   useEffect(()=>{
+// getUserToken()
+// console.log('soy un token', token.userToken.toString())
+//   },[])
 
   return (
     <>
       <div className="home-container">
         <Modal />
         <div className="cont-left">
-          <h1>Ready? Pet, Go! {token.userToken} </h1>
+          <h1>Ready? Pet, Go! </h1>
           <p>
             Don't you wonder what does addopting a pet feels like? Join our
             community and find out. Hundreds of pets are waiting for you to meet
@@ -53,7 +53,7 @@ console.log('soy un token', token.userToken)
           </p>
           {loggedIn ? (
             <button className="main">
-              <Link to={{ pathname: "/user" }} className="nav-item">
+              <Link to={{ pathname: "/user/:id" }} className="nav-item">
                 My personal area
               </Link>
             </button>

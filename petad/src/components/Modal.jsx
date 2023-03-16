@@ -9,9 +9,9 @@ import { logContext } from "./logContext";
 //   console.log(cookie);
 
 function Modal(props) {
-  const { loggedIn, logUser, sendUserToContext, checkSignIn } = useContext(logContext);
+  const { loggedIn, logUser, checkSignIn, modalShow, showLogin } = useContext(logContext);
 
-  const { modalShow, showLogin } = useContext(petsContext);
+  // const { modalShow, showLogin } = useContext(petsContext);
   const [signUpModal, setSignUpModal] = useState(false);
   // const [signedUserToken, setSignedUserToken] = useState({ userToken: "" });
 

@@ -10,7 +10,7 @@ const UsersController = require("./controllers/UsersController");
 const PetsController = require("./controllers/PetsController");
 
 const { AuthMiddleware } = require("./middlewares/AuthMiddleware");
-const { auth } = require("./middlewares/AuthorizationMiddleware");
+
 const app = express();
 
 initDB();
@@ -28,21 +28,19 @@ app.use(cors(corsOptions));
 //user APIs
 app.post("/signup", UsersController.Register);
 app.post("/login", UsersController.Login);
-app.get("/user/:id", UsersController.UserById);
-app.get("/user/auth", auth);
-app.put("/user/:id", UsersController.EditUser);
+app.get("/user/:id", AuthMiddleware, UsersController.UserById);
+app.put("/user/:id", AuthMiddleware, UsersController.EditUser);
 app.get("/user", UsersController.GetAllUsers);
 app.get("/user/:id/full", UsersController.UserById);
-app.post("/task/new", AuthMiddleware, (req, res) => {
-  console.log("req currentUser", req.currentUser);
-  res.send({ user: req.currentUser });
-});
 
 //pet APIs
 app.get("/search", PetsController.Search);
 app.get("/pet/:id", PetsController.SearchOne);
 app.put("/pet/:id", PetsController.EditPet);
 app.post("/pet", PetsController.PostNewPet);
+
+app.post("pet/:id/adopt", UsersController.Adopt);
+
 app.post("/pet/foto", upload.single("image"), PetsController.Photo);
 
 app.listen(3001, () => {

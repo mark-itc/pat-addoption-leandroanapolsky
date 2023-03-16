@@ -2,6 +2,7 @@ require("dotenv").config();
 const sha256 = require("js-sha256");
 const jwt = require("jsonwebtoken");
 const UsersDAO = require("../models/UsersDAO");
+const { ObjectId } = require("mongodb");
 const {
   RegisterValidation,
   LoginValidation,
@@ -81,7 +82,13 @@ module.exports = class UsersController {
       // console.log(token)
 
       return res.json({
+        auth: true,
         token: token,
+
+        user: {
+          _id: new ObjectId(user._id),
+          username: user.username,
+        },
       });
     } catch (e) {
       console.log(`Error in UsersController.Login ${e}`);
@@ -111,9 +118,18 @@ module.exports = class UsersController {
     }
   }
 
+  static async Adopt(req, res) {
+    try {
+      const adopt = await UsersDAO.adopt(req);
+      return res.send(allUsers);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   static async EditUser(req, res) {
     try {
-      const editUser = await UsersDAO.editUser(req);
+      const editUser = await UsersDAO.editUser(req.body);
       return res.send(editUser);
     } catch (error) {
       console.log(error);
