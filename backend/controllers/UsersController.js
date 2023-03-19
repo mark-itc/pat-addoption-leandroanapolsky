@@ -74,13 +74,6 @@ module.exports = class UsersController {
         tokenPass
       );
 
-      // if (!req.cookies.token) {
-      //   res.cookie("token", token, { maxAge: 1000000 });
-      //   console.log("cookie created");
-      // }
-
-      // console.log(token)
-
       return res.json({
         auth: true,
         token: token,
@@ -88,6 +81,7 @@ module.exports = class UsersController {
         user: {
           _id: new ObjectId(user._id),
           username: user.username,
+          role: user.role,
         },
       });
     } catch (e) {
@@ -109,6 +103,26 @@ module.exports = class UsersController {
     }
   }
 
+  static async DeleteUser(req, res) {
+    try {
+      const deletedUser = await UsersDAO.deleteUser(req.params);
+      console.log(deletedUser);
+      return res.send(deletedUser);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async PetsById(req, res) {
+    try {
+      const foundPetsIDs = await UsersDAO.getPetsById(req.params);
+      console.log(foundPetsIDs);
+      return res.send(foundPetsIDs);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   static async GetAllUsers(req, res) {
     try {
       const allUsers = await UsersDAO.showAllUsers(req);
@@ -120,10 +134,31 @@ module.exports = class UsersController {
 
   static async Adopt(req, res) {
     try {
-      const adopt = await UsersDAO.adopt(req);
-      return res.send(allUsers);
+      console.log("el adopt", req.body);
+      const adopt = await UsersDAO.adopt(req.body);
+      return res.send(adopt);
     } catch (error) {
-      console.log(error);
+      console.log("el error es de controller", error);
+    }
+  }
+
+  static async Foster(req, res) {
+    try {
+      console.log("el foster", req.body);
+      const foster = await UsersDAO.foster(req.body);
+      return res.send(foster);
+    } catch (error) {
+      console.log("el error es de controller", error);
+    }
+  }
+
+  static async Save(req, res) {
+    try {
+      console.log("el save", req.body);
+      const save = await UsersDAO.save(req.body);
+      return res.send(save);
+    } catch (error) {
+      console.log("el error es de controller", error);
     }
   }
 

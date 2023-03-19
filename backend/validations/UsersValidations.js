@@ -11,6 +11,7 @@ module.exports.RegisterValidation = ajv.compile({
 
     phone: { type: "string" },
     email: { type: "string" },
+    role: { type: "string" },
   },
   required: ["email", "password", "password2", "username", "phone"],
   additionalProperties: false,

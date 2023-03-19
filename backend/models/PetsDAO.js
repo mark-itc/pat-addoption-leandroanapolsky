@@ -10,7 +10,7 @@ module.exports = class PetsDAO {
 
     try {
       collection = await connection.collection("pets");
-      // console.log("succesfully connected to pets collection", collection);
+      
     } catch (e) {
       console.log("PetsDAO error", e);
     }
@@ -31,12 +31,26 @@ module.exports = class PetsDAO {
     return await collection.findOne({ _id: new ObjectId(id) });
   }
 
-  static async editPet(req) {
-    return await collection.updateOne(
-      { _id: new ObjectId(req.params) },
-      { $set: req.body }
-    );
-  }
+
+
+//ADOPT, FOSTER
+static async adoptPet(adoption) {
+  console.log("la adocion del pet", adoption);
+
+  return await collection.updateOne(
+    { _id: new ObjectId(adoption.petId) },
+    { $set: { status: 'Adopted' } }
+  );
+}
+
+static async fosterPet(fostering) {
+  console.log("la fosteracion del pet", fostering);
+
+  return await collection.updateOne(
+    { _id: new ObjectId(fostering.petId) },
+    { $set: { status: 'Fostered' } }
+  );
+}
 
   //ADD PET
   static async postNewPet(newPet) {
@@ -44,4 +58,5 @@ module.exports = class PetsDAO {
     await collection.insertOne({ ...newPet });
     return newPet;
   }
+
 };

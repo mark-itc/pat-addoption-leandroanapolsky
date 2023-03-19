@@ -1,20 +1,19 @@
 import "./Modal.css";
 import "./Button.css";
-import Cookies from "js-cookie";
+
 import React, { useState } from "react";
-import { useContext, useEffect } from "react";
-import { petsContext } from "./Context";
+import { useContext} from "react";
+
 import { logContext } from "./logContext";
-// const cookie = Cookies.get("token");
-//   console.log(cookie);
+
 
 function Modal(props) {
-  const { loggedIn, logUser, checkSignIn, modalShow, showLogin } = useContext(logContext);
+  const {  logUser, checkSignIn, modalShow, showLogin } =
+    useContext(logContext);
 
-  // const { modalShow, showLogin } = useContext(petsContext);
+  
   const [signUpModal, setSignUpModal] = useState(false);
-  // const [signedUserToken, setSignedUserToken] = useState({ userToken: "" });
-
+  
 
   const handleSignMode = () => {
     setSignUpModal(!signUpModal);
@@ -25,33 +24,13 @@ function Modal(props) {
     password: "",
   });
 
-  // const checkSignIn = () => {
-  //   fetch("http://localhost:3001/login", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(signInObj),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("Datos enviados:", data);
-  //       setSignedUserToken((prevState)=>({...prevState, userToken: data.token}))
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error al enviar datos:", error);
-  //     });
-
-  //   showLogin();
-  //   logUser();
-  // };
-
   const [signUpObj, setSignUpObj] = useState({
     email: "",
     password: "",
     password2: "",
     phone: "",
     username: "",
+    role: "User",
   });
 
   const checkSignUp = () => {
@@ -74,13 +53,7 @@ function Modal(props) {
     logUser();
   };
 
-  // useEffect(()=> {
-  //   if(cookie){
-  //     fetch(`http://localhost:3001/user/auth`, { withCredentials: true }).then(res=>{console.log(res)});
-          
-          
-  //   }
-  //     },[])
+  
 
   return (
     <>
@@ -170,7 +143,7 @@ function Modal(props) {
               <button className="main second" onClick={handleSignMode}>
                 Sign Up
               </button>
-              <button className="main" onClick={(e)=> checkSignIn(signInObj)}>
+              <button className="main" onClick={(e) => checkSignIn(signInObj)}>
                 Submit
               </button>
             </div>

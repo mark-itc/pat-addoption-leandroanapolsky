@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const logContext = createContext();
 
@@ -6,19 +6,24 @@ export default function LogContextProvider({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [modalShow, setModalShow] = useState(false);
-  const [loggedUser, setLoggedUser] = useState({ userId: "", token: "", username:"" });
+  const [loggedUser, setLoggedUser] = useState({
+    userId: "",
+    token: "",
+    username: "",
+  });
 
   const showLogin = () => {
     setModalShow(!modalShow);
   };
 
   const logUser = () => {
-    setLoggedIn(!loggedIn);
+    setLoggedIn(true);
   };
 
   const logUserOut = () => {
     console.log("user logged out");
     setLoggedIn(false);
+    setLoggedUser({ userId: "", token: "", username: "" });
   };
 
   const checkSignIn = (signInObj) => {
@@ -26,13 +31,12 @@ export default function LogContextProvider({ children }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "Authentication" (o authorization?): signedUserToken
+        
       },
       body: JSON.stringify(signInObj),
     })
       .then((response) => response.json())
       .then((data) => {
-        
         setLoggedUser((prevState) => ({
           ...prevState,
           token: data.token.toString(),
@@ -43,9 +47,12 @@ export default function LogContextProvider({ children }) {
         }));
         setLoggedUser((prevState) => ({
           ...prevState,
+          role: data.user.role,
+        }));
+        setLoggedUser((prevState) => ({
+          ...prevState,
           username: data.user.username,
         }));
-        
       })
       .catch((error) => {
         console.error("Error al enviar datos:", error);
@@ -55,20 +62,21 @@ export default function LogContextProvider({ children }) {
     logUser();
   };
 
-  useEffect(()=>{
-    console.log(loggedUser)
-  }, [loggedUser])
+  useEffect(() => {
+    console.log(loggedUser);
+  }, [loggedUser]);
 
   useEffect(() => {
-  
     const cachedUser = JSON.stringify(loggedUser);
     localStorage.setItem("cachedUser", cachedUser);
   }, [loggedUser]);
 
-    useEffect(()=>{
-      const check = localStorage.getItem('cachedUser')
-  if(check !== undefined) {  const{loggedUser} = JSON.parse(check) }
-    }, [])
+  useEffect(() => {
+    const check = localStorage.getItem("cachedUser");
+    if (check !== undefined) {
+      const { loggedUser } = JSON.parse(check);
+    }
+  }, []);
 
   return (
     <logContext.Provider

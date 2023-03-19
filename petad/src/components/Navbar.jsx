@@ -7,7 +7,7 @@ import logo from "./logo2.png";
 
 function Navbar() {
   const { loggedIn, logUser, modalShow, showLogin, loggedUser } = useContext(logContext);
-  // const { modalShow, showLogin } = useContext(petsContext);
+  
 
 
 
@@ -33,9 +33,7 @@ function Navbar() {
             Log In
           </div>
         )}
-        {/* <div className="nav-item" onClick={(e) => showLogin()}>
-          Log In
-        </div> */}
+        
       </div>
     </div>
   );

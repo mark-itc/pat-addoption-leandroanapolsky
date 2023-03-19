@@ -1,3 +1,7 @@
+button:hover {
+  cursor: pointer;
+}
+
 .main {
   color: white;
   padding: 5px 10px;
@@ -6,7 +10,7 @@
   font-weight: 500;
   border: 1px solid var(--main);
   background-color: var(--main);
-  /* margin-top: 15px; */
+  text-decoration: none;
   max-width: fit-content;
 }
 
@@ -27,4 +31,9 @@
 .reverse {
   color: var(--main);
   background-color: white;
+}
+
+Link:visited {
+  color: red;
+  text-decoration: none;
 }

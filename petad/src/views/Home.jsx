@@ -1,44 +1,22 @@
 import "./Home.css";
-import Cookies from "js-cookie";
+
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
+
 import Modal from "../components/Modal";
-import { useState, useContext, useEffect } from "react";
+import {  useContext } from "react";
 import { logContext } from "../components/logContext";
 
-import { petsContext } from "../components/Context";
+
 
 function Home() {
-  const { loggedIn, logUser, modalShow, showLogin } = useContext(logContext);
-  // const { modalShow, showLogin } = useContext(petsContext);
-  // const cookie = Cookies.get("token");
-  // console.log(cookie);
-  // const [modalShow, setModalShow] = useState(false);
+  const { loggedIn,  showLogin } = useContext(logContext);
+  
 
-  // const showLogin = () => {
-  //   setModalShow(!modalShow);
-  //   console.log('login')
-  // };
 
-  // useEffect(() => {
-  //   if (cookie) {
-  //     console.log("buscando cookies");
-  //     fetch(`http://localhost:3001/user/auth`, { credentials: true });
-  //   }
-  // }, []);
 
-  const[token, setToken] = useState({})
+ 
 
-  const getUserToken = () => {
-    const objToken = localStorage.getItem("signedUserToken");
-    const theToken = JSON.parse(objToken);
-    setToken(theToken)
-  };
 
-//   useEffect(()=>{
-// getUserToken()
-// console.log('soy un token', token.userToken.toString())
-//   },[])
 
   return (
     <>
@@ -62,9 +40,9 @@ function Home() {
               Log In
             </button>
           )}
-          {/* <button className="main"  onClick={(e) => showLogin()}>Log In</button> */}
+          
         </div>
-        <img src="https://paradepets.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1254/MTkxMzY1Nzg4NjczMzIwNTQ2/cutest-dog-breeds-jpg.webp"></img>
+        <img src="https://paradepets.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1254/MTkxMzY1Nzg4NjczMzIwNTQ2/cutest-dog-breeds-jpg.webp" alt="Cute puppies"></img>
       </div>
     </>
   );

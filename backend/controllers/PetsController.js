@@ -23,12 +23,24 @@ module.exports = class PetsController {
       console.log("the search failed in pets controller search one");
     }
   }
-  static async EditPet(req, res) {
+
+  static async AdoptPet(req, res) {
     try {
-      const editPet = await PetsDAO.editPet(req);
-      return res.send(editPet);
+      console.log("el adopt del pet", req.body);
+      const adoptPet = await PetsDAO.adoptPet(req.body);
+      return res.send(adoptPet);
     } catch (error) {
-      console.log(error);
+      console.log("el error es de controller", error);
+    }
+  }
+
+  static async FosterPet(req, res) {
+    try {
+      console.log("el foster del pet", req.body);
+      const adoptPet = await PetsDAO.fosterPet(req.body);
+      return res.send(fosterPet);
+    } catch (error) {
+      console.log("el error es de controller", error);
     }
   }
 
@@ -38,7 +50,7 @@ module.exports = class PetsController {
       console.log(result.secure_url);
 
       return res.send({ url: result.secure_url });
-      // console.log(req.body)
+     
     } catch (e) {
       console.log("error en el pet controller de la foto", e);
     }

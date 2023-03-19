@@ -1,6 +1,6 @@
 
 .pet-short-card {
-  width: 350px;
+  width: 15rem;
   background-color: var(--second);
   display: flex;
   flex-direction: row;
@@ -9,6 +9,7 @@
   margin: 10px 15px;
   height: 100px;
   padding: 10px;
+  border-radius: 5px;
 }
 .pet-card-right{
   display: flex;

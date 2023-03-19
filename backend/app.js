@@ -32,14 +32,19 @@ app.get("/user/:id", AuthMiddleware, UsersController.UserById);
 app.put("/user/:id", AuthMiddleware, UsersController.EditUser);
 app.get("/user", UsersController.GetAllUsers);
 app.get("/user/:id/full", UsersController.UserById);
+app.get("/user/pets/:id", UsersController.PetsById);
+app.delete("/user/delete/:id", UsersController.DeleteUser);
+
+app.put("/pet/adopt", AuthMiddleware, UsersController.Adopt);
+app.put("/pet/foster", AuthMiddleware, UsersController.Foster);
+app.put("/pet/save", AuthMiddleware, UsersController.Save);
 
 //pet APIs
 app.get("/search", PetsController.Search);
 app.get("/pet/:id", PetsController.SearchOne);
-app.put("/pet/:id", PetsController.EditPet);
 app.post("/pet", PetsController.PostNewPet);
-
-app.post("pet/:id/adopt", UsersController.Adopt);
+app.put("/pet/adopted", AuthMiddleware, PetsController.AdoptPet);
+app.put("/pet/fostered", AuthMiddleware, PetsController.FosterPet);
 
 app.post("/pet/foto", upload.single("image"), PetsController.Photo);
 

@@ -23,3 +23,25 @@
  .user-label{
     margin-top: 5px;
  }
+
+ .saved-container {
+   background-color: var(--second);
+   width: 50vw;
+   margin: 30px auto;
+   border-radius: 10px;
+   
+   color: var(--main);
+ }
+
+ .admin-area {
+  background-color: var(--second);
+  width: 40vw;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--main);
+  border-radius: 10px;
+  padding: 20px;
+ }

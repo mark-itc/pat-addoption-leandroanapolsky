@@ -5,8 +5,7 @@ import Modal from "../components/Modal";
 import PetCard from "../components/PetCard";
 import { logContext } from "../components/logContext";
 function Search() {
-  const { loggedUser } =
-    useContext(logContext);
+  const { loggedUser } = useContext(logContext);
   const [advance, setAdvance] = useState(false);
 
   const [searchResults, setSearchResults] = useState([]);
@@ -25,10 +24,10 @@ function Search() {
         `http://localhost:3001/search?type=${searchObj.type}&status=${searchObj.status}&height=${searchObj.height}&weight=${searchObj.weight}&name=${searchObj.name}`
       );
       const data = await response.json();
-      // console.log(data);
+      
       setSearchResults([...data]);
       console.log("search results", searchResults);
-      // return data;
+      
     } catch (e) {
       console.log("error en el fetch del search", e);
     }
@@ -46,10 +45,11 @@ function Search() {
 
     try {
       const response = await fetch(
-        `http://localhost:3001/search?type=${searchObj.type}`, options
+        `http://localhost:3001/search?type=${searchObj.type}`,
+        options
       );
       const data = await response.json();
-      // console.log(data);
+      
       setSearchResults([...data]);
       console.log("search results", searchResults);
       return data;
@@ -114,11 +114,7 @@ function Search() {
                 }
               />
             </div>
-            {/* <div className="results-card-cont">
-              {searchResults.map((item) => (
-                <PetCard name={item.name} status={item.status} />
-              ))}
-            </div> */}
+            
           </div>
         ) : (
           <div>
@@ -156,7 +152,7 @@ function Search() {
           <PetCard
             name={item.name}
             status={item.status}
-            id={item._id}
+            id={item._id.toString()}
             photo={item.image}
           />
         ))}
